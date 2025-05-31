@@ -35,7 +35,13 @@ public class ExchangeRateServices {
 
            //parse JSON and return the result
            JSONObject json = new JSONObject(response.toString());
-           return json.getDouble("result");
+
+           if (json.has("result") && !json.isNull("result")) {
+               return json.getDouble("result");
+           } else {
+               System.out.println("API response missing 'result': " + json.toString());
+               return -1;
+           }
 
 
        } catch(Exception e) {
