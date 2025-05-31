@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="src">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../../openjfx-21.0.7_windows-x64_bin-sdk/javafx-sdk-21.0.7/lib" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$PROJECT_DIR$/../../../../../../Downloads/json-20240303-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/src" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/../../openjfx-21.0.7_windows-x64_bin-sdk/javafx-sdk-21.0.7/lib" recursive="false" />
+  </library>
+</component>
