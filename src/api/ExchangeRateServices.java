@@ -13,7 +13,8 @@ public class ExchangeRateServices {
 
            //free version of api is used
            //100 uses only available
-           String apiURL = "http://api.exchangerate.host/convert?from=" + from + "&to=" + to;
+           String apiKey = "910e803643e4583954d09541b4091a0e";
+           String apiURL = "http://api.exchangerate.host/convert?from=" + from + "&to=" + to + "&access_key=" + apiKey;
 
            //open connection
            URL url = new URL(apiURL);
