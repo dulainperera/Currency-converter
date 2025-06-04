@@ -13,8 +13,8 @@ public class ExchangeRateServices {
 
            //free version of api is used
            //100 uses only available
-           String apiKey = "910e803643e4583954d09541b4091a0e";
-           String apiURL = "http://api.exchangerate.host/convert?from=" + from + "&to=" + to + "&access_key=" + apiKey;
+           String apiKey = "fca_live_Y9QRaz2Ty9lGsoq56LqLSFGCJwJgLdsj01tT1fYV";
+           String apiURL = "https://api.freecurrencyapi.com/v1/latest?apikey=fca_live_Y9QRaz2Ty9lGsoq56LqLSFGCJwJgLdsj01tT1fYV" + "&access_key=" + apiKey;
 
            //open connection
            URL url = new URL(apiURL);
@@ -37,10 +37,22 @@ public class ExchangeRateServices {
            //parse JSON and return the result
            JSONObject json = new JSONObject(response.toString());
 
-           if (json.has("result") && !json.isNull("result")) {
-               return json.getDouble("result");
+           if (json.has("data") && !json.isNull("data")) {
+               JSONObject data = json.getJSONObject("data");
+
+               if (data.has(to) && data.has(from)) {
+                   double toRate = data.getDouble(to);
+                   double fromRate = data.getDouble(from);
+
+                   //calculate exchange rate
+                   return toRate/fromRate;
+
+               } else {
+                   System.out.println("Currency not found in API response: " + json.toString());
+                   return -1;
+               }
            } else {
-               System.out.println("API response missing 'result': " + json.toString());
+               System.out.println("API response missing 'data': " + json.toString());
                return -1;
            }
 

@@ -23,11 +23,11 @@ public class CurrencyConverterApp extends Application {
         Label resultLabel = new Label("Converted Amount");
         Button convertButton = new Button("Convert");
 
-        fromBox.getItems().addAll("LKR", "USD", "EUR", "INR", "GBP", "JPY", "CNY");
-        toBox.getItems().addAll("LKR", "USD", "EUR", "INR", "GBP", "JPY", "CNY");
+        fromBox.getItems().addAll("USD", "EUR", "INR", "GBP", "JPY", "CNY", "AUD", "RUB");
+        toBox.getItems().addAll("USD", "EUR", "INR", "GBP", "JPY", "CNY", "AUD", "RUB");
 
         fromBox.setValue("USD");
-        toBox.setValue("LKR");
+        toBox.setValue("EUR");
 
         GridPane grid = new GridPane();
         grid.setPadding(new Insets(20));
@@ -51,7 +51,7 @@ public class CurrencyConverterApp extends Application {
 
                 // Input validation
                 if (input.isEmpty()) {
-                    resultLabel.setText("❗ Please enter an amount.");
+                    resultLabel.setText("Please enter an amount.");
                     return;
                 }
 
@@ -59,25 +59,25 @@ public class CurrencyConverterApp extends Application {
                 try {
                     amount = Double.parseDouble(input);
                     if (amount <= 0) {
-                        resultLabel.setText("❗ Enter a positive number.");
+                        resultLabel.setText("Enter a positive number.");
                         return;
                     }
                 } catch (NumberFormatException nfe) {
-                    resultLabel.setText("❗ Invalid amount. Use numbers only.");
+                    resultLabel.setText("Invalid amount. Use numbers only.");
                     return;
                 }
 
                 double rate = ExchangeRateServices.getExchangeRate(from, to);
 
                 if (rate == -1) {
-                    resultLabel.setText("❌ Failed to fetch exchange rate.");
+                    resultLabel.setText("Failed to fetch exchange rate.");
                 } else {
                     double converted = rate * amount;
                     resultLabel.setText(String.format("%.2f %s = %.2f %s", amount, from, converted, to));
                 }
 
             } catch (Exception ex) {
-                resultLabel.setText("⚠️ Error: " + ex.getMessage());
+                resultLabel.setText("Error: " + ex.getMessage());
             }
         });
 
